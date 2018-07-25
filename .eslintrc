@@ -43,7 +43,7 @@
     "rules": {
         // Explanation of rules -> http://eslint.org/docs/rules/
 
-        "comma-dangle"               : 2,
+        "comma-dangle"               : 0,
         "no-cond-assign"             : 2,
         "no-console"                 : 1,
         "no-constant-condition"      : 2,

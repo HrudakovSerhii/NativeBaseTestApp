@@ -6,54 +6,31 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet} from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import {createStackNavigator} from 'react-navigation';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu'
-});
+import HomeScreen from './src/screens/home/HomeScreen.js';
+import AboutScreen from './src/screens/about/AboutScreen.js';
+import InstructionScreen from './src/screens/instructions/InstructionScreen.js';
+import ProfilesScreen from './src/screens/profiles/ProfilesScreen.js';
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF'
+const App = createStackNavigator(
+	{
+		Home: {
+			screen: HomeScreen
+		},
+		About: {
+			screen: AboutScreen
+		},
+		Profiles: {
+			screen: ProfilesScreen
+		},
+		Instruction: {
+			screen: InstructionScreen
+		}
 	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10
-	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5
-	},
-});
-
-type Props = {};
-export default class App extends Component<Props> {
-	render() {
-		return (
-			<Container>
-				<Header>
-					<Left>
-						<Button light>
-							<Text>Menu</Text>
-							{/*<Icon name='menu' />*/}
-						</Button>
-					</Left>
-				</Header>
-				<Content>
-					<Text style={styles.instructions}>{instructions}</Text>
-				</Content>
-				<Footer/>
-			</Container>
-		);
+	{
+		initialRouteName: 'Home',
 	}
-}
+);
+
+export default App;
