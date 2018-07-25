@@ -43,7 +43,7 @@ export default class App extends Component<Props> {
 			<Container>
 				<Header>
 					<Left>
-						<Button light onPress={openMenuHandler}>
+						<Button light>
 							<Text>Menu</Text>
 							{/*<Icon name='menu' />*/}
 						</Button>
