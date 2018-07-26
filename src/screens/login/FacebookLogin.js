@@ -1,9 +1,8 @@
-import React from 'react';
-import LoginBase from './LoginBase';
+import React, {Component} from 'react';
 
-import {View, Text, Button} from 'react-native';
+import {View, Text} from 'react-native';
 
-class FacebookLogin extends LoginBase {
+class FacebookLogin extends Component {
 	constructor() {
 		super();
 	}
@@ -11,7 +10,6 @@ class FacebookLogin extends LoginBase {
 	render() {
 		return (
 			<View>
-				<Button title="Back" color="#003355" onPress={() => {this.backToMainLoginView()}}>Back</Button>
 				<Text>Login Facebook</Text>
 			</View>
 		);
