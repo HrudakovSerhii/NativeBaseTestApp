@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View} from 'react-native';
-import {Container, Content, Header, Footer, Button, Text, Left} from 'native-base';
+import {Button, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import plugin from 'eslint-plugin-react';
 
 import FacebookLogin from './FacebookLogin';
 import InstagramLogin from './InstagramLogin';
 import TwitterLogin from './TwitterLogin';
 
-class Login extends React.Component {
+class Login extends Component {
 	constructor() {
 		super();
 
@@ -36,6 +35,7 @@ class Login extends React.Component {
 
 		return (
 			<View>
+				<Button title="Back" color="#003355" onPress={() => this.changeView('')}><Text>Back</Text></Button>
 				{view}
 			</View>
 		);
@@ -55,7 +55,6 @@ class Login extends React.Component {
 	render() {
 		return (
 			<View>
-				<Button title="Back" color="#003355" onPress={() => this.changeView('')}>Back</Button>
 				{ this.state.viewType ? this.getViewFromType(this.state.viewType) : this.getDefaultLoginView()}
 			</View>
 		);
