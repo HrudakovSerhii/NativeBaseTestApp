@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, StatusBar, Modal} from 'react-native';
 import {Button, Text} from 'native-base';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import FacebookLogin from './FacebookLogin';
@@ -35,8 +36,11 @@ class Login extends Component {
 
 		return (
 			<View>
-				<Button title="Back" color="#003355" onPress={() => this.changeView('')}><Text>Back</Text></Button>
-				{view}
+				<Modal visible={true}>
+					<StatusBar hidden={true} />
+					<Button title="Back" color="#003355" onPress={() => this.changeView('')}><Text>Back</Text></Button>
+					{view}
+				</Modal>
 			</View>
 		);
 	};
@@ -62,3 +66,12 @@ class Login extends Component {
 }
 
 export default Login;
+
+// export default connect(state => ({
+// 	state: state.viewType
+// }),
+// 	/* Привязываем действия к компоненту. Теперь доступны события манипуляции счетчиком props.actions.increment() и props.actions.decrement() */
+// (dispatch) => ({
+// 	actions: bindActionCreators(loginActions, dispatch)
+// })
+// )(Login);
