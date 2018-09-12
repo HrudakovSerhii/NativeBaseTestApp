@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
 	},
 });
 
-class HomeScreen extends React.Component {
+class Main extends React.Component {
 	static navigationOptions = {
-		title: 'Home',
+		title: 'Home screen',
 	};
 
 	render() {
@@ -31,11 +31,8 @@ class HomeScreen extends React.Component {
 			<Container style={styles.container}>
 				<Header/>
 				<Content>
-					<Button onPress={function() {navigate('About', {appName: 'Test app'})}}>
-						<Text>Go To About</Text>
-					</Button>
-					<Button onPress={function() {navigate('Instruction', params)}}>
-						<Text>Go To Instruction</Text>
+					<Button onPress={function() {navigate('Login', params)}}>
+						<Text>Back to Login</Text>
 					</Button>
 					<Button onPress={function() {navigate('Profiles', params)}}>
 						<Text>Go To Profiles</Text>
@@ -47,4 +44,4 @@ class HomeScreen extends React.Component {
 	}
 }
 
-export default HomeScreen;
+export default Main;

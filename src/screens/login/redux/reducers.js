@@ -36,17 +36,6 @@ function twitterReducer(state = {loginData: []}, action) {
 	}
 }
 
-export function listRepos(user) {
-	return {
-		type   : GET_REPOS,
-		payload: {
-			request: {
-				url: `/users/${user}/repos`
-			}
-		}
-	};
-}
-
 export default {
 	facebookReducer,
 	instagramReducer,

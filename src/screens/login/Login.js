@@ -1,12 +1,37 @@
 import React, {Component} from 'react';
-import {View, StatusBar, Modal} from 'react-native';
-import {Button, Text} from 'native-base';
+import {connect} from 'react-redux';
 
+import {View, StatusBar, Modal, StyleSheet} from 'react-native';
+import {Container, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import FacebookLogin from './FacebookLogin';
-import InstagramLogin from './InstagramLogin';
-import TwitterLogin from './TwitterLogin';
+import {loadFacebookUserData, loadInstagramUserData, loadTwitterUserData} from './redux/actions';
+
+import LoginButton from './components/LoginButton';
+import LoginContainer from './components/LoginContainer';
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 3,
+		justifyContent: 'center',
+		backgroundColor: 'powderblue'
+	},
+	instructions: {
+		textAlign: 'center',
+		color: '#333333',
+		marginBottom: 5
+	},
+	loginButtonContainer: {
+		color: 'white'
+	},
+	loginButton: {
+		textAlign: 'center',
+		fontSize: 22,
+		width: 40,
+		height: 40
+	},
+});
+
 
 class Login extends Component {
 	constructor() {
@@ -15,63 +40,41 @@ class Login extends Component {
 		this.state = {
 			viewType: ''
 		};
+
+		this.navigation.bind(this.navigation);
 	}
-
-	changeView = (type) => {
-		this.setState({viewType: type});
-	};
-
-	getViewFromType = (type) => {
-		var view;
-
-		if (type === 'facebook') {
-			view = <FacebookLogin/>;
-		} else if (type === 'twitter') {
-			view = <TwitterLogin/>;
-		} else if (type === 'instagram') {
-			view = <InstagramLogin/>;
-		} else {
-			view = this.getDefaultLoginView();
-		}
-
-		return (
-			<View>
-				<Modal visible={true}>
-					<StatusBar hidden={true} />
-					<Button title="Back" color="#003355" onPress={() => this.changeView('')}><Text>Back</Text></Button>
-					{view}
-				</Modal>
-			</View>
-		);
-	};
-
-	getDefaultLoginView = () => {
-		return (
-			<View>
-				<Text>Here is Login page</Text>
-				<Icon.Button name="facebook" backgroundColor="#3b5998" onPress={() => this.changeView('facebook')}><Text>Login with Facebook</Text></Icon.Button>
-				<Icon.Button name="twitter" backgroundColor="#3b5998" onPress={() => this.changeView('twitter')}><Text>Login with Twitter</Text></Icon.Button>
-				<Icon.Button name="instagram" backgroundColor="#3b5998" onPress={() => this.changeView('instagram')}><Text>Login with Instagram</Text></Icon.Button>
-			</View>
-		);
-	};
 
 	render() {
 		return (
-			<View>
-				{ this.state.viewType ? this.getViewFromType(this.state.viewType) : this.getDefaultLoginView()}
-			</View>
+			<Container style={styles.container}>
+				<Modal visible={true}>
+					<StatusBar hidden={true} />
+					<View>
+						<Text>Hello</Text>
+						<LoginButton buttonIconType="facebook" buttonLabel="Login with Facebook" click={() => this.navigation({screenType: 'Main', navData: {appName: 'Test app'}})}/>
+						{/*<LoginButton buttonIconType="instagram" buttonLabel="Login with Instagram" click={this.navigation({screenType: 'Main', navData: {appName: 'Test app'}})}/>*/}
+						{/*<LoginButton buttonIconType="twitter" buttonLabel="Login with Twitter" click={this.navigation({screenType: 'Main', navData: {appName: 'Test app'}})}/>*/}
+					</View>
+				</Modal>
+			</Container>
 		);
+	}
+
+	navigation(navProps) {
+		this.props.navigation.navigate(navProps.screenType, navProps.navData);
 	}
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+	loginStatus: state.loginStatus,
+	loginList  : state.loginList,
+	loginData  : state.loginData
+});
 
-// export default connect(state => ({
-// 	state: state.viewType
-// }),
-// 	/* Привязываем действия к компоненту. Теперь доступны события манипуляции счетчиком props.actions.increment() и props.actions.decrement() */
-// (dispatch) => ({
-// 	actions: bindActionCreators(loginActions, dispatch)
-// })
-// )(Login);
+const mapDispatchToProps = (dispatch) => ({
+	loadFacebookUserData : (userName, userPassword) => dispatch(loadFacebookUserData(userName, userPassword)),
+	loadInstagramUserData: (userName, userPassword) => dispatch(loadInstagramUserData(userName, userPassword)),
+	loadTwitterUserData  : (userName, userPassword) => dispatch(loadTwitterUserData(userName, userPassword))
+});
+
+export default Login; //connect(mapStateToProps, mapDispatchToProps(Login));
